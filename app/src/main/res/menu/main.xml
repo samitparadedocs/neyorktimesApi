@@ -3,7 +3,7 @@
     <item  android:id="@+id/item1"
         android:title="Top Stores"/>
     <item  android:id="@+id/item2"
-        android:title="Item 2"/>
+        android:title="MovieReviews"/>
     <item  android:id="@+id/item3"
-        android:title="Item 3"/>
+        android:title="Most Popular"/>
 </menu>
