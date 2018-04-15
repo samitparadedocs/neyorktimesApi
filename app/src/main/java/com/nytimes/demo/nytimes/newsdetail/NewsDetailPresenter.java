@@ -7,7 +7,8 @@ import com.nytimes.demo.nytimes.news.models.Result;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by Samit on 4/14/2018.
+ * Created by Samit on
+ * 4/14/2018.
  */
 
 public class NewsDetailPresenter {

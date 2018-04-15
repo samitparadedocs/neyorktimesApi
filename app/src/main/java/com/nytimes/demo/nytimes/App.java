@@ -6,7 +6,8 @@ import com.activeandroid.ActiveAndroid;
 import com.facebook.stetho.Stetho;
 
 /**
- * Created by Samit on 4/11/2018.
+ * Created by Samit
+ * on 4/14/2018.
  */
 
 public class App extends Application {

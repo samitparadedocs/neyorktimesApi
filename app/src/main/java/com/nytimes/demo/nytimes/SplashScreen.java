@@ -8,7 +8,6 @@ import com.nytimes.demo.nytimes.news.NewsActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +16,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(5000);
+                    sleep(3000);
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {

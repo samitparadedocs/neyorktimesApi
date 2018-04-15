@@ -1,6 +1,7 @@
 package com.nytimes.demo.nytimes.networking;
 
 import com.nytimes.demo.nytimes.BuildConfig;
+import com.nytimes.demo.nytimes.news.NewsPresenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,5 +84,7 @@ public class NetworkModule {
             NetworkService networkService) {
         return new Service(networkService);
     }
+
+
 
 }

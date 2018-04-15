@@ -20,7 +20,7 @@
             android:value="5" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.nytimes.demo.nytimes.activeandroid.Details,com.nytimes.demo.nytimes.activeandroid.ResultPojo,,com.nytimes.demo.nytimes.activeandroid.MultimediumPojo,com.nytimes.demo.nytimes.activeandroid.AnotherCustomeTypeSerializer" />
+            android:value="com.nytimes.demo.nytimes.activeandroidPojo.ResultPojo,,com.nytimes.demo.nytimes.activeandroidPojo.MultimediumPojo,com.nytimes.demo.nytimes.activeandroidPojo.AnotherCustomeTypeSerializer" />
 
         <activity android:name="com.nytimes.demo.nytimes.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
@@ -31,7 +31,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".news.NewsActivity"/>
-        <activity android:name="com.nytimes.demo.nytimes.newsdetail.NewsDetailActivity"/>
+        <activity android:name="com.nytimes.demo.nytimes.newsdetail.NewsDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

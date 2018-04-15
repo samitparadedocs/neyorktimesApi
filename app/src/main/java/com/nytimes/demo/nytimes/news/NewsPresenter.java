@@ -4,6 +4,8 @@ import com.nytimes.demo.nytimes.networking.NetworkError;
 import com.nytimes.demo.nytimes.networking.Service;
 import com.nytimes.demo.nytimes.news.models.NewsResponse;
 
+import javax.inject.Inject;
+
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -12,7 +14,7 @@ public class NewsPresenter {
     private final NewsView view;
     private CompositeSubscription subscriptions;
 
-    public NewsPresenter(Service service, NewsView view) {
+      public NewsPresenter(Service service, NewsView view) {
         this.service = service;
         this.view = view;
         this.subscriptions = new CompositeSubscription();

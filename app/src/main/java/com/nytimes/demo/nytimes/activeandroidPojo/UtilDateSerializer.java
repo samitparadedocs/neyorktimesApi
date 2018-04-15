@@ -1,4 +1,4 @@
-package com.nytimes.demo.nytimes.activeandroid;
+package com.nytimes.demo.nytimes.activeandroidPojo;
 
 import com.activeandroid.serializer.TypeSerializer;
 
@@ -29,7 +29,6 @@ final public class UtilDateSerializer extends TypeSerializer {
 		if (data == null) {
 			return null;
 		}
-
 		return new Date((Long) data);
 	}
 }

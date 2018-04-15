@@ -4,6 +4,7 @@ import android.util.Log;
 
 
 import com.nytimes.demo.nytimes.news.models.NewsResponse;
+import com.nytimes.demo.nytimes.utils.IConstants;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -20,7 +21,7 @@ public class Service {
     }
 
     public Subscription getNewsList(final GetNewsListCallback getNewsListCallback){
-        return networkService.getNewsList()
+        return networkService.getNewsList(IConstants.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
