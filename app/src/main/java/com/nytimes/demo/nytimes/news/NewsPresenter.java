@@ -56,6 +56,7 @@ public class NewsPresenter {
     }
 
     private void loadDataFromLocalDatabase(NetworkError networkError) {
+
         List<ResultPojo> list = ResultPojo.getResultMultiMediaMapping();
         view.initialiseAdapter(list);
         view.onFailure(networkError.getAppErrorMessage());
@@ -75,6 +76,7 @@ public class NewsPresenter {
      */
     private void processNewsResponse(NewsResponse newsResponse) {
         ActiveAndroid.beginTransaction();
+        List<ResultPojo> resultPojos = new ArrayList<>();
         try {
             //notify data to list
             if (newsResponse.getResults().size() > 0) {
@@ -82,7 +84,7 @@ public class NewsPresenter {
                 new Delete().from(MultimediumPojo.class).execute();
             }
 
-            List<ResultPojo> resultPojos = new ArrayList<>();
+
             for (Result result : newsResponse.getResults()) {
                 ResultPojo resultPojo = new ResultPojo();
                 resultPojo.setData(result);
@@ -95,13 +97,14 @@ public class NewsPresenter {
                 }
                 resultPojos.add(resultPojo);
             }
-            view.initialiseAdapter(resultPojos);
-            view.setActivityActionBarTitle("Top Stories");
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             ActiveAndroid.setTransactionSuccessful();
         }
+        view.initialiseAdapter(resultPojos);
+        view.setActivityActionBarTitle("Top Stories");
         view.geNewsListSuccess(newsResponse);
     }
 

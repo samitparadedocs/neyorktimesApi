@@ -122,7 +122,7 @@ public class NewsActivity extends BaseActivity implements NewsView {
         switch (item.getItemId()) {
             case R.id.item1:
                 presenter.getNewsList();
-                Toast.makeText(getApplicationContext(), "Top Stories Seleted", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "Top Stories Seleted", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.item2:
                 Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_LONG).show();
