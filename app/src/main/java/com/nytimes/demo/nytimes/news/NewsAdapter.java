@@ -53,7 +53,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .load(images)
                     .into(holder.background);
         }
-
     }
 
 
@@ -61,7 +60,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public int getItemCount() {
         return data.size();
     }
-
 
     public interface OnItemClickListener {
         void onClick(ResultPojo Item);
@@ -75,7 +73,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
             background = (ImageView) itemView.findViewById(R.id.image);
-
         }
 
 
@@ -88,6 +85,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             });
         }
     }
-
 
 }

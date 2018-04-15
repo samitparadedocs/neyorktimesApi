@@ -5,37 +5,30 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.activeandroid.ActiveAndroid;
-import com.activeandroid.query.Delete;
-import com.activeandroid.query.Select;
 import com.nytimes.demo.nytimes.BaseActivity;
 import com.nytimes.demo.nytimes.R;
-import com.nytimes.demo.nytimes.activeandroidPojo.MultimediumPojo;
 import com.nytimes.demo.nytimes.activeandroidPojo.ResultPojo;
 import com.nytimes.demo.nytimes.databinding.ActivityMainBinding;
 import com.nytimes.demo.nytimes.networking.Service;
 import com.nytimes.demo.nytimes.news.models.NewsResponse;
-import com.nytimes.demo.nytimes.news.models.Result;
 import com.nytimes.demo.nytimes.newsdetail.NewsDetailActivity;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
+/*
+With the help of the News Actvity We can load the newslist consuming apis for
+Neyork times.
+ */
 public class NewsActivity extends BaseActivity implements NewsView {
 
     @Inject
     public Service service;
     public NewsPresenter presenter;
-    long id;
     private ActivityMainBinding mBinding;
 
     @Override
@@ -46,7 +39,11 @@ public class NewsActivity extends BaseActivity implements NewsView {
         init();
         presenter = new NewsPresenter(service, this);
         presenter.getNewsList();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     public void renderView() {
@@ -57,6 +54,11 @@ public class NewsActivity extends BaseActivity implements NewsView {
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @Override
+    public void setActivityActionBarTitle(String activityActionBarTitle) {
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(activityActionBarTitle);
+    }
     @Override
     public void showWait() {
         mBinding.progress.setVisibility(View.VISIBLE);
@@ -70,43 +72,20 @@ public class NewsActivity extends BaseActivity implements NewsView {
     @Override
     public void onFailure(String appErrorMessage) {
         Toast.makeText(this, appErrorMessage, Toast.LENGTH_SHORT).show();
-        List<ResultPojo> list = ResultPojo.getResultMultiMediaMapping();
-        initialiseAdapter(list);
     }
 
     @Override
     public void geNewsListSuccess(NewsResponse newsResponse) {
-        ActiveAndroid.beginTransaction();
-        try {
-            //notify data to list
-            if (newsResponse.getResults().size() > 0) {
-                new Delete().from(ResultPojo.class).execute();
-                new Delete().from(MultimediumPojo.class).execute();
-            }
-
-            List<ResultPojo> resultPojos = new ArrayList<>();
-            for (Result result : newsResponse.getResults()) {
-                ResultPojo resultPojo = new ResultPojo();
-                resultPojo.setData(result);
-                long id = resultPojo.save();
-                Log.v("id_value main table", String.valueOf(id));
-                for (MultimediumPojo multimediumPojo : resultPojo.multimedia) {
-                    multimediumPojo.setMappingId(id);
-                    long idLong = multimediumPojo.save();
-                    Log.v("id_value mapping table", String.valueOf(idLong));
-                }
-                resultPojos.add(resultPojo);
-            }
-            initialiseAdapter(resultPojos);
-            setActivityActionBarTitle("Top Stories");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ActiveAndroid.setTransactionSuccessful();
-        }
+       // success
     }
 
-    private void initialiseAdapter(List<ResultPojo> resultPojo) {
+    /**
+     * @param resultPojo
+     * Below method useful to intialize Adapter and set list received after
+     * response
+     */
+    @Override
+    public void initialiseAdapter(List<ResultPojo> resultPojo) {
         NewsAdapter adapter = new NewsAdapter(getApplicationContext(), resultPojo,
                 new NewsAdapter.OnItemClickListener() {
                     @Override
@@ -131,6 +110,13 @@ public class NewsActivity extends BaseActivity implements NewsView {
         return true;
     }
 
+    /**
+     * @param item menu item
+     * @return
+     * With the help of the onOptionsItemSelected
+     * WE can get the result for the different category
+     * for now i have provise support only for TOp STORIES
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -148,16 +134,5 @@ public class NewsActivity extends BaseActivity implements NewsView {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private void setActivityActionBarTitle(String activityActionBarTitle) {
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(activityActionBarTitle);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 
 }

@@ -12,7 +12,6 @@ import retrofit2.adapter.rxjava.HttpException;
 
 import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 
-
 public class NetworkError extends Throwable {
     public static final String DEFAULT_ERROR_MESSAGE = "Something went wrong! Please try again.";
     public static final String NETWORK_ERROR_MESSAGE = "No Internet Connection!";

@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Samit on 4/13/2018.
+ * Created by Samit
+ * on 4/13/2018.
  */
 @Table(name = "Results")
 public class ResultPojo extends Model implements Serializable {

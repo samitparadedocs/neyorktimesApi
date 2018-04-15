@@ -8,7 +8,8 @@ import com.nytimes.demo.nytimes.news.models.Multimedium;
 import java.io.Serializable;
 
 /**
- * Created by Samit on 4/14/2018.
+ * Created by Samit
+ * on 4/14/2018.
  */
 @Table(name =" Multimedium" )
 public class MultimediumPojo extends Model implements Serializable {
